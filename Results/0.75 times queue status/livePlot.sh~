@@ -1,0 +1,68 @@
+gnuplot <<_EOF_
+set term png
+set output "speed.png"
+set title "Speed per iteration"
+set ylabel "Speed (#Tasks/s)"
+set xlabel "Iteration #"
+plot 'output.dat' using 1:5 title "Speed"  with lines
+
+set term png 
+set output "time.png"
+set title "Time per iteration"
+set ylabel "Time (s)"
+set xlabel "Iteration #"
+plot 'output.dat' using 1:6 title "Time"  with lines
+
+set term png 
+set output "workload.png"
+set title "Workload per iteration (%)"
+set ylabel "Work (#Tasks)"
+set xlabel "Iteration #"
+plot 'output.dat' using 1:2 title "Worker 1"  with lines, 'output.dat' using 1:3 title "Worker 2"  with lines, 'output.dat' using 1:4 title "Worker 3"  with lines
+
+set term png
+set output "energyTask.png"
+set title "Mean energy per task in each iteration"
+set ylabel "Mean energy per task (MJoules)"
+set xlabel "Iteration #"
+plot 'energy.dat' using 1:8 title "Energy" with lines
+
+set term png
+set output "energyOP.png"
+set title "Mean energy per operation in each iteration"
+set ylabel "Mean energy per OP (Joules)"
+set xlabel "Iteration #"
+plot 'energy.dat' using 1:9 title "Energy" with lines
+
+set term png
+set output "energyTaskDev.png"
+set title "Energy spent per task on each device in each iteration"
+set ylabel "Energy per task (MJoules)"
+set xlabel "Iteration #"
+plot 'energy.dat' using 1:2 title "Worker 1" with lines, 'energy.dat' using 1:3 title "Worker 2" with lines, 'energy.dat' using 1:4 title "Worker 3" with lines
+
+set term png 
+set output "energyOPDev.png"
+set title "Energy spent per operation on each device in each iteration"
+set ylabel "Energy per OP (Joules)"
+set xlabel "Iteration #"
+plot 'energy.dat' using 1:5 title "Worker 1" with lines, 'energy.dat' using 1:6 title "Worker 2" with lines, 'energy.dat' using 1:7 title "Worker 3" with lines
+
+set term png
+set output "queueStatus.png"
+set title "Current status of the queue"
+set yrange [0:3000]
+set boxwidth 0.5
+set style fill solid
+plot 'output-bargraph.dat' using 1:3:xtic(2) with boxes
+
+set term png 
+set output "workloadRange.png"
+set title "Workload per iteration (%)"
+set yrange [0:100]
+set ylabel "Work (#Tasks)"
+set xlabel "Iteration #"
+plot 'output.dat' using 1:2 title "Worker 1"  with lines, 'output.dat' using 1:3 title "Worker 2"  with lines, 'output.dat' using 1:4 title "Worker 3"  with lines
+
+_EOF_
+
